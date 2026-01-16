@@ -22,6 +22,8 @@ export SSHKEY="~/.ssh/wkone"
 
 #### Script 1 - nginx-install
 ```bash#!/bin/bash
+# SSH into our EC2 instance using the environment variables sourced from "env" file
+# Using heredoc syntax to send apt commands to install and start nginx
 ssh -i $SSHKEY -T $USER@$IPADDR << EOF
 sudo apt update
 sudo apt install -y nginx
