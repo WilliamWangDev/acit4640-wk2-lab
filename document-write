@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# SSH into our EC2 instance using the environment variables sourced from "env" file
+# Using heredoc syntax to send multiple lines to the SSH connection
+ssh -i $SSHKEY -T $USER@$IPADDR << EOF
+
+# sudo tee is used here instead of something like cat to overwrite the default nginx html file along with another heredoc so we can send multiple lines of HTML code.
+sudo tee /var/www/html/index.nginx-debian.html << EOD
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Hello World</title>
+</head>
+<body>
+  <h1>Hello World!</h1>
+  <p>Today's date is: $(date +'%A/%B/%Y') </p>
+</body>
+</html>
+EOD
+
+# reload the nginx service using systemctl
+sudo systemctl reload nginx
+EOF
+
+
