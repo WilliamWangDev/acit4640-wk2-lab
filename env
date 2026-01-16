@@ -1,0 +1,4 @@
+export USER="admin"
+export IPADDR="ec2-98-94-93-234.compute-1.amazonaws.com"
+export SSHKEY="~/.ssh/wkone"
+
